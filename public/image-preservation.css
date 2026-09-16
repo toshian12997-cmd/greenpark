@@ -1,0 +1,55 @@
+/* Green Park photography rule: preserve the supplied photograph. Do not crop, zoom, or enlarge it for effect. */
+
+.welcome-gate > img {
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  object-fit: contain;
+  object-position: center;
+  transform: none !important;
+  animation: none !important;
+  background: var(--green-deep);
+}
+
+.hero-image-wrap {
+  background: var(--green-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-image-wrap img,
+.experience-card img,
+.page-intro > img,
+.gallery-card img,
+.visit-grid > img {
+  object-fit: contain !important;
+  object-position: center center !important;
+  transform: none !important;
+  background: var(--green-deep);
+}
+
+.hero-image-wrap:hover img,
+.experience-card:hover img,
+.gallery-card:hover img {
+  transform: none !important;
+}
+
+.experience-card,
+.gallery-card,
+.page-intro > img,
+.visit-grid > img {
+  background: #eef2ed;
+}
+
+/* The photo is never stretched; its native proportions stay visible. */
+.gallery-card img,
+.experience-card img,
+.page-intro > img,
+.visit-grid > img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Keep the welcome image completely still and uncropped. */
+@keyframes gateZoom { from, to { transform: none; } }
