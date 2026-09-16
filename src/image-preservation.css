@@ -1,0 +1,113 @@
+/* Green Park photography preservation layer.
+   Keep the supplied hotel photography intact: no artificial zoom,
+   no forced crop, and no hover scaling. Layouts may letterbox or
+   grow vertically rather than sacrificing the original composition. */
+
+.hero-image-wrap,
+.page-intro > img,
+.visit-grid > img,
+.gallery-card {
+  overflow: hidden;
+}
+
+.hero-image-wrap {
+  display: grid;
+  place-items: center;
+  background: #07382d;
+}
+
+.hero-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain !important;
+  object-position: center !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+.hero-image-wrap:hover img,
+.gallery-card:hover img {
+  transform: none !important;
+}
+
+.page-intro > img,
+.visit-grid > img {
+  height: auto !important;
+  max-height: 720px;
+  object-fit: contain !important;
+  object-position: center !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+.gallery-grid {
+  align-items: start;
+}
+
+.gallery-card,
+.gallery-1,
+.gallery-2,
+.gallery-3,
+.gallery-4,
+.gallery-5 {
+  height: auto !important;
+  min-height: 0 !important;
+  aspect-ratio: auto !important;
+  background: var(--green-deep);
+}
+
+.gallery-card img {
+  position: relative !important;
+  inset: auto !important;
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100%;
+  object-fit: contain !important;
+  object-position: center !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+.gallery-card::after {
+  pointer-events: none;
+}
+
+.gallery-card figcaption {
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  padding: 14px 2px 4px;
+  color: var(--green-deep) !important;
+}
+
+.gallery-card figcaption b {
+  color: var(--green-deep) !important;
+}
+
+.gallery-card::after {
+  display: none;
+}
+
+.welcome-gate > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain !important;
+  object-position: center !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+@media (max-width: 760px) {
+  .hero-image-wrap {
+    min-height: auto !important;
+  }
+
+  .hero-image-wrap img,
+  .page-intro > img,
+  .visit-grid > img {
+    width: 100%;
+    height: auto !important;
+  }
+}
