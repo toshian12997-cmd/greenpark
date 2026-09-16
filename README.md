@@ -1,6 +1,6 @@
 # Green Park Hotel — Njoro
 
-A presentation-ready **review prototype** for Green Park Hotel in Njoro, Kenya. The repository keeps the production architecture and security plan documented while the current build focuses on a polished, demonstrable guest experience and admin information architecture.
+A polished React + TypeScript website and interactive admin control-room frontend for Green Park Hotel in Njoro, Kenya.
 
 ## Run locally
 
@@ -9,23 +9,32 @@ npm install
 npm run dev
 ```
 
-## Review scope
+## Current build
 
-Implemented for review:
-- Editorial hospitality homepage and navigation
-- Stay, Menu, Events, Gallery, About, Location and Contact surfaces
-- Guest booking/enquiry flow with prototype confirmation
-- Admin preview with dashboard and content-management areas
-- Responsive layout for desktop and mobile
-- Natural green / cream / charcoal visual system
-- Empty states instead of invented hotel data
+- Editorial hospitality homepage with real Green Park project photography
+- Stay, Dining, Events, Gallery, About, Location and Contact surfaces
+- Guest booking/enquiry flow without a permanent guest account
+- Booking requests appear in the local admin workflow during the demo session
+- Dedicated `/admin` control room with staff login screen
+- Admin areas for Overview, Rooms, Menu, Events, Gallery, Bookings, Enquiries, Content and Settings
+- Working demo CRUD for rooms, menu items and events using in-memory state
+- Empty states instead of invented rooms, dishes, events, prices, reviews or customers
+- Welcome animation, reveal motion, responsive layouts and mobile admin navigation
+- Green / cream / charcoal hospitality visual system
+- Photo asset management guidance for responsive WebP/AVIF delivery
 
-The visual code intentionally uses **photo slots** for approved Green Park imagery. Add the final hotel photographs under `public/images/` when the approved asset set is available; the presentation styling is already prepared for them.
+## Important production boundary
 
-## Next phase
+The current repository contains the **working frontend experience and admin demonstration layer**. It does not yet claim production backend functionality.
 
-The documented production architecture remains in `docs/ARCHITECTURE.md` and `docs/ROADMAP.md`. Database persistence, secure admin authentication, API services, image processing, security hardening, SEO/performance testing and deployment are deliberately not presented as complete in this review build.
+Before hotel staff use the system operationally, the next engineering phase should connect:
 
-## Engineering direction
+- secure server-side authentication and authorization
+- PostgreSQL persistence and API services
+- real booking confirmation workflow
+- email/SMS notifications
+- protected image storage and responsive processing
+- validation, rate limiting, audit logs and security headers
+- SEO, analytics and final performance verification
 
-React + TypeScript + Vite for the current review frontend. The planned production system keeps PostgreSQL, a TypeScript service/API layer, secure admin authentication and responsive image delivery as documented architectural targets.
+The architecture and roadmap are documented in `docs/ARCHITECTURE.md` and `docs/ROADMAP.md`.
