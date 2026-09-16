@@ -1,0 +1,28 @@
+/* Green Park review-photo treatment: prevent tiling and force intentional crops. */
+.hero-photo,
+.photo-space,
+.feature-photo,
+.wide-photo,
+.gallery-tile,
+.about-photo {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  image-rendering: auto;
+}
+
+.hero-photo {
+  background-color: #173d2c;
+}
+
+.photo-space,
+.feature-photo,
+.wide-photo,
+.gallery-tile,
+.about-photo {
+  overflow: hidden;
+}
+
+@media (max-width: 950px) {
+  .hero-photo { background-position: center; }
+}
