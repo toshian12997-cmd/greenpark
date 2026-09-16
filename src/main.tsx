@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
+import './photo-layout.css';
 
 type View = 'home'|'stay'|'menu'|'events'|'gallery'|'about'|'location'|'contact'|'book'|'admin';
 const ASSET='/images/green-park/';
