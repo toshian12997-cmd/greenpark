@@ -1,0 +1,22 @@
+/* Friday review visual corrections */
+.hero-visual{align-items:center}
+.hero-photo{aspect-ratio:16/9!important;min-height:0!important;background-image:url('/images/green-park/hero-evening.jpg')!important;background-repeat:no-repeat!important;background-size:cover!important;background-position:center!important}
+.feature-strip{grid-template-columns:repeat(3,minmax(0,1fr));margin-left:5vw;margin-right:5vw}
+.feature-photo{height:220px!important;background-repeat:no-repeat!important;background-size:cover!important;background-position:center!important}
+.content-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:1080px}
+.photo-space{height:240px!important;min-height:240px!important;background-repeat:no-repeat!important;background-size:cover!important;background-position:center!important}
+.visual-content{max-width:1080px}
+.wide-photo{height:320px!important;margin-bottom:34px!important;background-repeat:no-repeat!important;background-size:cover!important;background-position:center!important}
+.gallery-grid{grid-template-columns:1.15fr .85fr .85fr;gap:10px}
+.gallery-tile{height:250px!important;background-repeat:no-repeat!important;background-size:cover!important;background-position:center!important}
+.gallery-tile.g1{height:510px!important;grid-row:span 2}
+.about-visual{max-width:1080px}
+.about-photo{height:400px!important;background-repeat:no-repeat!important;background-size:cover!important;background-position:center!important}
+.map-card{height:400px!important;background:var(--green)!important}
+.map-card:before,.map-card:after{display:none!important}
+.map-grid{box-shadow:var(--shadow);padding:24px 28px}
+.review-band{display:none!important}
+footer p{display:none!important}
+.intro p{max-width:720px;font-size:16px}
+@media(max-width:950px){.content-grid{grid-template-columns:1fr}.gallery-grid{grid-template-columns:1fr 1fr}.gallery-tile.g1{height:340px!important;grid-row:auto}.wide-photo{height:280px!important}.about-photo{height:340px!important}}
+@media(max-width:600px){.feature-strip{grid-template-columns:1fr;margin:0}.feature-photo{height:230px!important}.gallery-grid{grid-template-columns:1fr}.gallery-tile,.gallery-tile.g1{height:260px!important}.hero-photo{aspect-ratio:16/10!important}.map-card{height:300px!important}}
