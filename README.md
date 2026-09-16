@@ -1,6 +1,27 @@
 # Green Park Hotel — Njoro
 
-A polished React + TypeScript website and interactive admin control-room frontend for Green Park Hotel in Njoro, Kenya.
+A new Green Park Hotel experience built as the flagship project for this repository: a photography-led hospitality website with a signature welcome reveal, expressive typography, controlled glass surfaces, motion choreography, direct Google Maps / WhatsApp actions and a dedicated admin control-room route.
+
+## Experience layer
+
+- React + TypeScript + Vite
+- GSAP motion timelines for the welcome sequence and interaction choreography
+- Manrope + Cormorant Garamond typography system
+- Green Park forest green / warm ivory / charcoal visual language
+- Responsive editorial layout with mobile-first behavior
+- Real Green Park property photography from `public/images/green-park/`
+- Guest flow without forced permanent accounts
+- `/admin` control-room presentation for future hotel operations
+
+## Signature welcome
+
+The opening sequence uses a natural barbecue reference image as the visual hook, then animates the food toward the camera and expands a Green Park portal from the food area before revealing the main site. The intent is to make the welcome screen feel like entering the Grill & Lounge rather than loading a generic template.
+
+The barbecue reference currently comes from a Pexels photo page selected for the project; the final production version can replace it with approved Green Park photography or video without changing the motion architecture.
+
+## Business connections
+
+The site includes the hotel's supplied Google Maps link and WhatsApp contact path using **+254 794 047344**.
 
 ## Run locally
 
@@ -9,32 +30,4 @@ npm install
 npm run dev
 ```
 
-## Current build
-
-- Editorial hospitality homepage with real Green Park project photography
-- Stay, Dining, Events, Gallery, About, Location and Contact surfaces
-- Guest booking/enquiry flow without a permanent guest account
-- Booking requests appear in the local admin workflow during the demo session
-- Dedicated `/admin` control room with staff login screen
-- Admin areas for Overview, Rooms, Menu, Events, Gallery, Bookings, Enquiries, Content and Settings
-- Working demo CRUD for rooms, menu items and events using in-memory state
-- Empty states instead of invented rooms, dishes, events, prices, reviews or customers
-- Welcome animation, reveal motion, responsive layouts and mobile admin navigation
-- Green / cream / charcoal hospitality visual system
-- Photo asset management guidance for responsive WebP/AVIF delivery
-
-## Important production boundary
-
-The current repository contains the **working frontend experience and admin demonstration layer**. It does not yet claim production backend functionality.
-
-Before hotel staff use the system operationally, the next engineering phase should connect:
-
-- secure server-side authentication and authorization
-- PostgreSQL persistence and API services
-- real booking confirmation workflow
-- email/SMS notifications
-- protected image storage and responsive processing
-- validation, rate limiting, audit logs and security headers
-- SEO, analytics and final performance verification
-
-The architecture and roadmap are documented in `docs/ARCHITECTURE.md` and `docs/ROADMAP.md`.
+The current repository is a front-end flagship build. The next production layer remains PostgreSQL-backed persistence, secure admin authentication, real booking workflows, optimized media storage, notifications and deployment hardening.
