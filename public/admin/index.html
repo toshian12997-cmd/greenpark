@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#123d2b" />
+  <title>Green Park Admin — Review Portal</title>
+  <link rel="stylesheet" href="/admin/admin.css" />
+</head>
+<body>
+  <main class="admin-app">
+    <section id="login" class="login-screen">
+      <div class="login-mark">G</div>
+      <p class="kicker">GREEN PARK HOTEL · NJORO</p>
+      <h1>Staff control room.</h1>
+      <p class="lead">A secure administration area for managing hotel content, enquiries and bookings.</p>
+      <form id="login-form" class="login-card">
+        <label>Email<input id="email" type="email" required placeholder="staff@greenpark.example" /></label>
+        <label>Password<input id="password" type="password" required placeholder="••••••••" /></label>
+        <button type="submit" class="primary">Enter admin preview →</button>
+        <small>Review build only — production authentication is part of the next engineering phase.</small>
+      </form>
+      <a class="back-link" href="/">← Back to hotel website</a>
+    </section>
+
+    <section id="dashboard" class="dashboard hidden">
+      <aside class="sidebar">
+        <div class="brand"><span>G</span><div><b>GREEN PARK</b><small>ADMIN PORTAL</small></div></div>
+        <nav id="side-nav">
+          <button class="active" data-section="overview">Overview</button>
+          <button data-section="bookings">Bookings</button>
+          <button data-section="rooms">Rooms</button>
+          <button data-section="menu">Menu</button>
+          <button data-section="events">Events</button>
+          <button data-section="gallery">Gallery</button>
+          <button data-section="enquiries">Enquiries</button>
+          <button data-section="content">Website content</button>
+        </nav>
+        <button id="logout" class="logout">Log out</button>
+      </aside>
+
+      <section class="workspace">
+        <header class="topbar">
+          <div><p class="kicker">CONTROL ROOM</p><h2 id="section-title">Overview</h2></div>
+          <span class="review-pill">REVIEW PORTAL</span>
+        </header>
+
+        <section id="section-overview" class="section active-section">
+          <div class="welcome-panel"><div><p class="kicker">GREEN PARK HOTEL</p><h1>A control room for the whole website.</h1><p>Manage the public experience from one place once the production database and authentication layer are connected.</p></div><div class="quick-note">No invented hotel records are shown.</div></div>
+          <div class="stat-grid">
+            <article><span>Bookings</span><strong>0</strong><small>No live records yet</small></article>
+            <article><span>Enquiries</span><strong>0</strong><small>No live records yet</small></article>
+            <article><span>Events</span><strong>Ready</strong><small>Publishing structure prepared</small></article>
+            <article><span>Content</span><strong>Ready</strong><small>Website controls mapped</small></article>
+          </div>
+          <div class="panel"><div class="panel-head"><div><p class="kicker">QUICK ACTIONS</p><h3>What the staff member can do</h3></div></div><div class="action-grid">
+            <button data-jump="rooms"><b>Add room</b><span>Create accommodation content</span></button>
+            <button data-jump="menu"><b>Update menu</b><span>Add items, categories and prices</span></button>
+            <button data-jump="events"><b>Create event</b><span>Publish dates and venues</span></button>
+            <button data-jump="gallery"><b>Upload gallery</b><span>Add approved hotel photography</span></button>
+          </div></div>
+        </section>
+
+        <template id="management-template"><div class="panel"><p class="kicker" id="management-kicker">MANAGEMENT</p><h3 id="management-title">Management</h3><p id="management-copy"></p><div class="record-head"><span>Records</span><span>Status</span><span>Actions</span></div><div class="record-row"><strong>0</strong><span>Ready for production connection</span><span>Add · Edit · Publish</span></div><div class="empty-state">No live records are connected in the review build.</div></div></template>
+        <section id="section-management" class="section"></section>
+      </section>
+    </section>
+  </main>
+  <script src="/admin/admin.js"></script>
+</body>
+</html>
