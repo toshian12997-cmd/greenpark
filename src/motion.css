@@ -1,78 +1,422 @@
-:root{--motion-ease:cubic-bezier(.16,1,.3,1);--motion-soft:cubic-bezier(.22,.61,.36,1)}
-
-/* Editorial welcome: restrained, typographic and brand-led — no synthetic spinner / orb. */
-.welcome-screen{position:fixed;inset:0;z-index:9999;background:#f7f2e8;color:#123d2b;display:grid;place-items:center;overflow:hidden;animation:welcomeExit 780ms var(--motion-ease) 2.35s forwards}
-.welcome-screen::before{content:'';position:absolute;inset:0 auto 0 0;width:38%;background:#123d2b;transform:translateX(-100%);animation:welcomePanel 1.05s var(--motion-ease) .05s forwards}
-.welcome-screen::after{content:'';position:absolute;top:0;bottom:0;left:38%;width:1px;background:rgba(18,61,43,.16);transform:scaleY(0);transform-origin:top;animation:welcomeRule 900ms var(--motion-ease) .25s forwards}
-.welcome-core{position:relative;z-index:2;width:min(520px,82vw);display:grid;grid-template-columns:86px 1fr;column-gap:22px;align-items:end;text-align:left}
-.welcome-mark{grid-row:1 / span 2;width:auto;height:auto;margin:0;color:#f7f2e8;border:0;border-radius:0;display:block;font:700 88px/.78 Georgia,serif;letter-spacing:-.08em;opacity:0;transform:translateX(-18px);animation:welcomeMark 900ms var(--motion-ease) .55s forwards}
-.welcome-name{margin:0 0 9px;color:#123d2b;font:700 18px/1 'DM Sans',sans-serif;letter-spacing:.28em;opacity:0;transform:translateY(16px);animation:welcomeText 800ms var(--motion-ease) .7s forwards}
-.welcome-sub{margin:0;color:#6a756e;font:500 9px/1 'DM Sans',sans-serif;letter-spacing:.24em;opacity:0;transform:translateY(12px);animation:welcomeText 800ms var(--motion-ease) .82s forwards}
-.welcome-line-loader{grid-column:2;width:170px;height:1px;margin:25px 0 0;background:rgba(18,61,43,.16);overflow:hidden;opacity:0;animation:welcomeText 600ms var(--motion-ease) .95s forwards}
-.welcome-line-loader span{display:block;width:100%;height:100%;background:#123d2b;transform:scaleX(0);transform-origin:left;animation:welcomeLoad 1.12s var(--motion-soft) 1.02s forwards}
-
-/* Layered page motion. */
-.page{animation:pageEnter 720ms var(--motion-ease) both}
-.hero-visual{animation:heroPanelIn 900ms var(--motion-ease) both}
-.hero-copy{animation:heroCopyIn 900ms var(--motion-ease) .08s both}
-.intro{animation:contentRise 900ms var(--motion-ease) .12s both}
-.feature{animation:featureIn 750ms var(--motion-ease) both}
-.feature:nth-child(2){animation-delay:.08s}.feature:nth-child(3){animation-delay:.16s}
-.home-cta{animation:contentRise 900ms var(--motion-ease) .18s both}
-.wide-photo{animation:photoIn 1000ms var(--motion-ease) both}
-.about-copy,.location-copy,.booking form,.confirmation{animation:contentRise 800ms var(--motion-ease) .1s both}
-
-/* Individual reveals. */
-.reveal-up{opacity:0;transform:translateY(34px);animation:revealUp .9s var(--motion-ease) forwards}
-.reveal-up.delay-1{animation-delay:.10s}.reveal-up.delay-2{animation-delay:.20s}.reveal-up.delay-3{animation-delay:.30s}
-.reveal-image{opacity:0;transform:scale(1.045);clip-path:inset(0 0 100% 0);animation:revealImage 1.15s var(--motion-ease) forwards}
-
-/* Tactile interaction. */
-.hover-lift{transition:transform 600ms var(--motion-ease),box-shadow 600ms var(--motion-ease)}
-.hover-lift:hover{transform:translateY(-8px);box-shadow:0 24px 55px rgba(14,45,31,.14)}
-.dark-button,.nav-book{position:relative;overflow:hidden;transition:transform 350ms var(--motion-ease),box-shadow 350ms var(--motion-ease),background 350ms ease}
-.dark-button::before,.nav-book::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.12);transform:translateX(-105%);transition:transform 500ms var(--motion-ease)}
-.dark-button:hover,.nav-book:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(18,61,43,.18)}
-.dark-button:hover::before,.nav-book:hover::before{transform:translateX(105%)}
-.text-button{position:relative;padding-bottom:5px}
-.text-button::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(.35);transform-origin:left;transition:transform 450ms var(--motion-ease)}
-.text-button:hover::after{transform:scaleX(1)}
-.brand-mark{transition:transform 450ms var(--motion-ease),border-radius 450ms var(--motion-ease)}
-.brand:hover .brand-mark{transform:rotate(-7deg) scale(1.06);border-radius:9px}
-nav button:not(.nav-book){position:relative;transition:color 250ms ease,transform 250ms var(--motion-ease)}
-nav button:not(.nav-book)::after{content:'';position:absolute;left:0;right:0;bottom:-7px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:center;transition:transform 300ms var(--motion-ease)}
-nav button:not(.nav-book):hover{transform:translateY(-1px)}
-nav button:not(.nav-book):hover::after,nav button.active:not(.nav-book)::after{transform:scaleX(1)}
-.gallery-tile{transition:transform 700ms var(--motion-ease),filter 700ms ease}
-.gallery-tile:hover{filter:saturate(1.06);transform:scale(.992)}
-
-/* Modern Chromium supports view-timeline: content reveals as the user scrolls. */
-@supports(animation-timeline:view()){
- .intro,.feature,.home-cta,.wide-photo,.about-copy,.location-copy,.gallery-tile,.booking form,.admin-panel{animation-name:scrollReveal;animation-duration:1ms;animation-timing-function:linear;animation-fill-mode:both;animation-timeline:view();animation-range:entry 8% cover 28%}
+:root {
+  --gp-motion-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --gp-motion-soft: cubic-bezier(0.22, 0.8, 0.24, 1);
+  --gp-fast: 420ms;
+  --gp-base: 820ms;
+  --gp-slow: 1400ms;
 }
 
-@keyframes welcomePanel{to{transform:none}}
-@keyframes welcomeRule{to{transform:scaleY(1)}}
-@keyframes welcomeMark{to{opacity:1;transform:none}}
-@keyframes welcomeText{to{opacity:1;transform:none}}
-@keyframes welcomeLoad{to{transform:scaleX(1)}}
-@keyframes welcomeExit{0%{opacity:1;visibility:visible;transform:none}100%{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-10px)}}
-@keyframes pageEnter{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-@keyframes heroPanelIn{from{opacity:0;transform:translateX(-22px)}to{opacity:1;transform:none}}
-@keyframes heroCopyIn{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
-@keyframes contentRise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
-@keyframes featureIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
-@keyframes photoIn{from{opacity:0;clip-path:inset(0 10% 100% 0)}to{opacity:1;clip-path:inset(0 0 0 0)}}
-@keyframes scrollReveal{from{opacity:0;transform:translateY(48px) scale(.985)}to{opacity:1;transform:none}}
-@keyframes revealUp{to{opacity:1;transform:none}}
-@keyframes revealImage{to{opacity:1;transform:none;clip-path:inset(0 0 0 0)}}
-
-@media(max-width:760px){
- .welcome-screen::before{width:26%}.welcome-screen::after{left:26%}
- .welcome-core{grid-template-columns:58px 1fr;column-gap:15px}.welcome-mark{font-size:64px}.welcome-name{font-size:13px;letter-spacing:.21em}.welcome-sub{font-size:8px}.welcome-line-loader{width:135px}
- .hero-copy{animation-delay:.02s}.feature{animation-delay:.06s!important}
+/*
+ * GREEN PARK SIGNATURE MOTION SYSTEM
+ * The welcome sequence behaves like a brand reveal rather than a loader.
+ * The rest of the site inherits the same motion language: architectural
+ * wipes, restrained typography movement, image reveals and tactile controls.
+ */
+.welcome-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: #103b2b;
+  color: #f7f2e8;
+  isolation: isolate;
+  animation: gpWelcomeExit 1050ms var(--gp-motion-ease) 3.15s forwards;
 }
-@media(prefers-reduced-motion:reduce){
- .welcome-screen,.welcome-screen::before,.welcome-screen::after,.welcome-mark,.welcome-name,.welcome-sub,.welcome-line-loader,.welcome-line-loader span,.page,.hero-visual,.hero-copy,.intro,.feature,.home-cta,.wide-photo,.about-copy,.location-copy,.booking form,.confirmation,.reveal-up,.reveal-image,.gallery-tile,.admin-panel{animation:none!important}
- .welcome-screen{opacity:1;visibility:visible;pointer-events:none}.welcome-mark,.welcome-name,.welcome-sub,.welcome-line-loader{opacity:1;transform:none}.welcome-line-loader span{transform:scaleX(1)}.welcome-screen::before{transform:none}.welcome-screen::after{transform:scaleY(1)}.reveal-up,.reveal-image{opacity:1;transform:none;clip-path:none}
+
+.welcome-screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(180deg, rgba(16, 59, 43, 0.98) 0%, rgba(16, 59, 43, 0.75) 48%, rgba(7, 29, 20, 0.72) 100%),
+    url('/images/green-park/hero-evening.webp') center / cover no-repeat;
+  transform: scale(1.12);
+  opacity: 0;
+  animation: gpPlaceReveal 1900ms var(--gp-motion-ease) 500ms forwards;
+}
+
+.welcome-screen::after {
+  content: '';
+  position: absolute;
+  inset: 7vh 5vw;
+  z-index: -1;
+  border: 1px solid rgba(247, 242, 232, 0.18);
+  clip-path: inset(48% 18% 48% 18%);
+  animation: gpFrameOpen 1600ms var(--gp-motion-ease) 180ms forwards;
+}
+
+.welcome-core {
+  position: relative;
+  z-index: 2;
+  width: min(680px, 84vw);
+  text-align: center;
+  transform: translateY(18px);
+  animation: gpCoreSettle 1100ms var(--gp-motion-ease) 100ms forwards;
+}
+
+.welcome-mark {
+  position: relative;
+  width: 94px;
+  height: 94px;
+  margin: 0 auto 22px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 0;
+  color: #f7f2e8;
+  font: 600 52px/1 Georgia, 'Times New Roman', serif;
+  letter-spacing: -0.04em;
+  opacity: 0;
+  animation: gpMarkReveal 950ms var(--gp-motion-ease) 260ms forwards;
+}
+
+.welcome-mark::before,
+.welcome-mark::after {
+  content: '';
+  position: absolute;
+  background: rgba(247, 242, 232, 0.72);
+}
+
+.welcome-mark::before {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: gpRuleDraw 900ms var(--gp-motion-ease) 720ms forwards;
+}
+
+.welcome-mark::after {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  transform: scaleY(0);
+  transform-origin: top center;
+  animation: gpVerticalDraw 900ms var(--gp-motion-ease) 600ms forwards;
+}
+
+.welcome-name {
+  margin: 0;
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: 0.34em;
+  text-indent: 0.34em;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: gpTextSet 800ms var(--gp-motion-ease) 700ms forwards;
+}
+
+.welcome-sub {
+  margin: 12px 0 0;
+  color: rgba(247, 242, 232, 0.72);
+  font-size: 10px;
+  line-height: 1.2;
+  letter-spacing: 0.30em;
+  text-indent: 0.30em;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: gpTextSet 760ms var(--gp-motion-ease) 875ms forwards;
+}
+
+.welcome-line-loader {
+  position: relative;
+  width: min(270px, 56vw);
+  height: 1px;
+  margin: 40px auto 0;
+  overflow: hidden;
+  background: rgba(247, 242, 232, 0.18);
+  opacity: 0;
+  animation: gpTextSet 600ms var(--gp-motion-ease) 1010ms forwards;
+}
+
+.welcome-line-loader span {
+  display: block;
+  width: 34%;
+  height: 100%;
+  background: #f7f2e8;
+  transform: translateX(-140%);
+  animation: gpLineTravel 1500ms var(--gp-motion-ease) 1040ms forwards;
+}
+
+.welcome-core::after {
+  content: 'STAY  ·  DINE  ·  GATHER';
+  display: block;
+  margin-top: 28px;
+  color: rgba(247, 242, 232, 0.48);
+  font-size: 8px;
+  line-height: 1;
+  letter-spacing: 0.26em;
+  text-indent: 0.26em;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: gpTextSet 650ms var(--gp-motion-ease) 1230ms forwards;
+}
+
+.page,
+.hero,
+.intro,
+.feature-strip,
+.home-cta,
+.visual-content,
+.about-visual,
+.split,
+.booking {
+  animation: gpPageEnter 950ms var(--gp-motion-ease) both;
+}
+
+.hero-visual {
+  animation: gpHeroPanelIn 950ms var(--gp-motion-ease) both;
+}
+
+.hero-copy {
+  animation: gpHeroCopyIn 950ms var(--gp-motion-ease) 80ms both;
+}
+
+.hero-photo {
+  transform: scale(1.045);
+  animation: gpPhotoEnter 1450ms var(--gp-motion-ease) 80ms both;
+}
+
+.hero-copy::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(247, 242, 232, 0.98), rgba(247, 242, 232, 0));
+  transform: translateX(-101%);
+  pointer-events: none;
+  animation: gpCopyWipe 1100ms var(--gp-motion-ease) 260ms forwards;
+}
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(34px);
+  animation: gpRevealUp 900ms var(--gp-motion-ease) forwards;
+}
+
+.reveal-up.delay-1 { animation-delay: 120ms; }
+.reveal-up.delay-2 { animation-delay: 220ms; }
+.reveal-up.delay-3 { animation-delay: 330ms; }
+
+.reveal-image {
+  opacity: 0;
+  clip-path: inset(0 9% 0 9%);
+  transform: scale(1.045);
+  animation: gpImageReveal 1200ms var(--gp-motion-ease) forwards;
+}
+
+.feature,
+.dark-button,
+.nav-book,
+.text-button,
+.brand,
+.gallery-tile,
+.footer-links button,
+.admin-entry,
+.menu-button {
+  transition:
+    transform var(--gp-base) var(--gp-motion-soft),
+    box-shadow var(--gp-base) var(--gp-motion-soft),
+    color 300ms ease,
+    background-color 420ms ease;
+}
+
+.feature:hover,
+.gallery-tile:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 24px 52px rgba(14, 45, 31, 0.15);
+}
+
+.dark-button,
+.nav-book {
+  position: relative;
+  overflow: hidden;
+}
+
+.dark-button::before,
+.nav-book::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateX(-105%);
+  transition: transform 520ms var(--gp-motion-ease);
+}
+
+.dark-button:hover,
+.nav-book:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(18, 61, 43, 0.20);
+}
+
+.dark-button:hover::before,
+.nav-book:hover::before {
+  transform: translateX(105%);
+}
+
+.text-button {
+  position: relative;
+  padding-bottom: 5px;
+}
+
+.text-button::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0.35);
+  transform-origin: left;
+  transition: transform 450ms var(--gp-motion-ease);
+}
+
+.text-button:hover::after {
+  transform: scaleX(1);
+}
+
+.brand-mark {
+  transition: transform 450ms var(--gp-motion-ease), border-radius 450ms var(--gp-motion-ease);
+}
+
+.brand:hover .brand-mark {
+  transform: rotate(-7deg) scale(1.06);
+  border-radius: 9px;
+}
+
+nav button:not(.nav-book) {
+  position: relative;
+  transition: color 250ms ease, transform 250ms var(--gp-motion-ease);
+}
+
+nav button:not(.nav-book)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -7px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 300ms var(--gp-motion-ease);
+}
+
+nav button:not(.nav-book):hover {
+  transform: translateY(-1px);
+}
+
+nav button:not(.nav-book):hover::after,
+nav button.active:not(.nav-book)::after {
+  transform: scaleX(1);
+}
+
+@supports (animation-timeline: view()) {
+  .intro,
+  .feature,
+  .home-cta,
+  .wide-photo,
+  .about-copy,
+  .location-copy,
+  .gallery-tile,
+  .booking form,
+  .admin-panel {
+    animation-name: gpScrollReveal;
+    animation-duration: 1ms;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: view();
+    animation-range: entry 8% cover 28%;
+  }
+}
+
+@keyframes gpWelcomeExit {
+  0% { opacity: 1; visibility: visible; transform: translateY(0); }
+  78% { opacity: 1; visibility: visible; transform: translateY(-2vh); }
+  100% { opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-2vh); }
+}
+
+@keyframes gpPlaceReveal {
+  from { opacity: 0; transform: scale(1.12); }
+  to { opacity: 1; transform: scale(1.02); }
+}
+
+@keyframes gpFrameOpen {
+  0% { opacity: 0; clip-path: inset(48% 18% 48% 18%); }
+  58% { opacity: 1; clip-path: inset(14% 5% 14% 5%); }
+  100% { opacity: 1; clip-path: inset(0); }
+}
+
+@keyframes gpCoreSettle {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gpMarkReveal {
+  from { opacity: 0; transform: translateY(20px) scale(0.84); filter: blur(5px); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+@keyframes gpRuleDraw { to { transform: scaleX(1); } }
+@keyframes gpVerticalDraw { to { transform: scaleY(1); } }
+@keyframes gpTextSet { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes gpLineTravel { from { transform: translateX(-140%); } to { transform: translateX(340%); } }
+@keyframes gpPageEnter { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes gpHeroPanelIn { from { opacity: 0; transform: translateX(-24px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes gpHeroCopyIn { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes gpPhotoEnter { from { opacity: 0; transform: scale(1.045); } to { opacity: 1; transform: scale(1); } }
+@keyframes gpCopyWipe { to { transform: translateX(101%); } }
+@keyframes gpRevealUp { to { opacity: 1; transform: translateY(0); } }
+@keyframes gpImageReveal { from { opacity: 0; clip-path: inset(0 9% 0 9%); transform: scale(1.045); } to { opacity: 1; clip-path: inset(0); transform: scale(1); } }
+@keyframes gpScrollReveal { from { opacity: 0; transform: translateY(48px) scale(0.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+@media (max-width: 760px) {
+  .welcome-screen::after { inset: 5vh 5vw; }
+  .welcome-mark { width: 76px; height: 76px; font-size: 42px; }
+  .welcome-name { font-size: 15px; letter-spacing: 0.28em; text-indent: 0.28em; }
+  .welcome-core::after { font-size: 7px; letter-spacing: 0.18em; text-indent: 0.18em; }
+  .welcome-line-loader { margin-top: 34px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .welcome-screen,
+  .welcome-screen::before,
+  .welcome-screen::after,
+  .welcome-core,
+  .welcome-mark,
+  .welcome-mark::before,
+  .welcome-mark::after,
+  .welcome-name,
+  .welcome-sub,
+  .welcome-line-loader,
+  .welcome-line-loader span,
+  .welcome-core::after,
+  .page,
+  .hero,
+  .intro,
+  .feature-strip,
+  .home-cta,
+  .visual-content,
+  .about-visual,
+  .split,
+  .booking,
+  .hero-visual,
+  .hero-copy,
+  .hero-photo,
+  .reveal-up,
+  .reveal-image,
+  .gallery-tile,
+  .admin-panel {
+    animation: none !important;
+  }
+
+  .welcome-screen { opacity: 0; visibility: hidden; pointer-events: none; }
+  .reveal-up,
+  .reveal-image { opacity: 1; transform: none; clip-path: none; }
 }
