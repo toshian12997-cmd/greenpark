@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './styles.css';
 import './photo-layout.css';
 import './motion.css';
+import './ux-polish.css';
 
 type View='home'|'stay'|'menu'|'events'|'gallery'|'about'|'location'|'contact'|'book'|'admin';
 const ASSET='/images/green-park/';
