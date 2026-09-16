@@ -1,35 +1,31 @@
 # Green Park Hotel — Njoro
 
-Production-oriented hotel website and management platform for Green Park Hotel in Njoro, Kenya.
+A presentation-ready **review prototype** for Green Park Hotel in Njoro, Kenya. The repository keeps the production architecture and security plan documented while the current build focuses on a polished, demonstrable guest experience and admin information architecture.
+
+## Run locally
+
+```bash
+npm install
+npm run dev
+```
+
+## Review scope
+
+Implemented for review:
+- Editorial hospitality homepage and navigation
+- Stay, Menu, Events, Gallery, About, Location and Contact surfaces
+- Guest booking/enquiry flow with prototype confirmation
+- Admin preview with dashboard and content-management areas
+- Responsive layout for desktop and mobile
+- Natural green / cream / charcoal visual system
+- Empty states instead of invented hotel data
+
+The visual code intentionally uses **photo slots** for approved Green Park imagery. Add the final hotel photographs under `public/images/` when the approved asset set is available; the presentation styling is already prepared for them.
+
+## Next phase
+
+The documented production architecture remains in `docs/ARCHITECTURE.md` and `docs/ROADMAP.md`. Database persistence, secure admin authentication, API services, image processing, security hardening, SEO/performance testing and deployment are deliberately not presented as complete in this review build.
 
 ## Engineering direction
 
-- Frontend: React + TypeScript
-- Styling: Tailwind CSS + custom CSS design tokens
-- Backend: TypeScript API/service layer
-- Database: PostgreSQL
-- Images: responsive WebP/AVIF variants with lazy loading
-- Authentication: secure admin-only authentication; guests do not need accounts
-- Security: HTTPS, HSTS, CSP, secure cookies, server-side validation/authorization, rate limiting and audit logging
-- SEO: semantic HTML, metadata, Open Graph, sitemap/robots, hotel/local-business structured data
-- Performance: preload only critical hero media, lazy-load below-fold content, code splitting, caching and minimal third-party JavaScript
-
-## Product areas
-
-### Public
-Home, Stay/Rooms, Menu, Events, Gallery, About, Location, Contact and guest booking/enquiry flow.
-
-### Admin
-Dashboard, Rooms, Menu, Events, Gallery, Bookings, Enquiries, Website Content and Settings.
-
-## Data policy
-
-Do not invent hotel facts, reviews, room prices, events, customers, bookings or statistics. Real Green Park Hotel Njoro assets and verified business information should be used when available.
-
-## Design principles
-
-Modern editorial hospitality: real photography, strong typography, natural green/cream/charcoal palette, restrained motion, purposeful whitespace and minimal functional iconography. Avoid generic SaaS/AI visuals, neon gradients, excessive glassmorphism, fake metrics and decorative UI noise.
-
-## Status
-
-Foundation repository. Build in small, testable increments and verify functionality before calling features complete.
+React + TypeScript + Vite for the current review frontend. The planned production system keeps PostgreSQL, a TypeScript service/API layer, secure admin authentication and responsive image delivery as documented architectural targets.
